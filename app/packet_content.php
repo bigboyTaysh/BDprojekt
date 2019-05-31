@@ -16,12 +16,12 @@ $conn->query('SET CHARACTER_SET utf8_unicode_ci');
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-$sql = "SELECT * FROM  powiadomienia WHERE id_powiadomienia = '$id' ";
+$sql = "SELECT * FROM  pakiety WHERE id_pakietu = '$id' ";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        echo $row['tresc'];
+        echo ($row['max_pamiec']/1000);
     }
 } else {
     echo "" . $conn->error;
