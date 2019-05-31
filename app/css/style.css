@@ -1,0 +1,156 @@
+a {
+    background-color: #44c767;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 17px;
+    padding: 6px 31px;
+    text-decoration: none;
+    text-shadow: 0px 0px 0px #2f6627;
+}
+
+a:hover {
+    background-color: #5cbf2a;
+}
+
+a:active {
+    position: relative;
+    top: 1px;
+}
+
+a.red {
+    background-color: #CC0033;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 17px;
+    padding: 6px 31px;
+    text-decoration: none;
+    text-shadow: 0px 0px 0px #2f6627;
+}
+
+a.red:hover {
+    background-color: #FF0033;
+}
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    width: 90%;
+    height: 90%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+}
+
+input:not([type=submit]) {
+    margin-left: 8px;
+    height: 35px;
+    width: 150px;
+    border-radius: 5px;
+}
+
+.inputy {
+    display: inline-block;
+}
+
+.napisy {
+    display: inline-block;
+}
+
+.goodinput {
+    margin-left: 8px;
+    height: 35px;
+    width: 150px;
+    border-radius: 5px;
+}
+
+.badinput {
+    margin-left: 8px;
+    height: 25px;
+    width: 150px;
+    border-radius: 5px;
+    border-color: red;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+td,
+th {
+    padding: 5px;
+    border-bottom: 1px solid #aaa;
+}
+
+input[type=submit],
+button {
+    color: #494949 !important;
+    text-transform: uppercase;
+    background: #ffffff;
+    padding: 5px;
+    border: 4px solid #494949 !important;
+    border-radius: 6px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+input[type=submit]:hover,
+button:hover {
+    color: #ffffff !important;
+    background: #f6b93b;
+    border-color: #f6b93b !important;
+    transition: all 0.4s ease 0s;
+    cursor: pointer;
+}
+
+.wyswietlane_uslugi {
+    padding: 5px;
+    border: 1px solid #aaa;
+}
+
+.notification {
+    padding: 5px;
+    border: 1px solid #aaa;
+}
+
+.main {
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+}
+
+.inmain {
+    overflow-y: scroll;
+    height: 600px;
+}
+
+p.welcome {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 35px;
+}
+
+select {
+    background: transparent;
+    width: 150px;
+    padding: 5px;
+    font-size: 16px;
+    line-height: 1;
+    border: 1;
+    border-radius: 0;
+    height: 34px;
+    -webkit-appearance: none;
+}
