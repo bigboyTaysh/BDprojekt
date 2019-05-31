@@ -81,6 +81,25 @@ require "templates/head.php";
             $dlugosc = $_POST['dlugosc'];
             $id_uslugi;
 
+            $sql = "SELECT * FROM pakiety WHERE id_pakietu = $id_pakietu";
+
+            $statement = $connect->prepare($sql);
+            $statement->execute();
+            $result = $statement->fetchAll();
+
+            if ($result && $statement->rowCount() > 0) {
+                foreach ($result as $row) {
+                    $max_pamiec = $row['max_pamiec'];
+                }
+            }
+
+            $sql = "UPDATE serwery SET
+                zajeta_pamiec = $max_pamiec WHERE id_serwera = $id_serwera";
+
+            $statement = $connect->prepare($sql);
+            $statement->execute();
+            
+
             date_default_timezone_set('Europe/Warsaw');
             $data_poczatkowa = date('Y-m-d', time());
 
