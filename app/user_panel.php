@@ -61,6 +61,7 @@ require "templates/head.php";
                         <p>Data początkowa: <?php echo $row["data_poczatkowa"]; ?></p>
                         <p>Data końcowa: <?php echo $row["data_koncowa"]; ?></p>
                         <p>Pakiet: <?php echo $row["nazwa"]; ?></p>
+                        <button data-id="<?php echo $row["id_uslugi"]; ?>">Usuń</button>
                     </div>
 
                 <?php
@@ -81,5 +82,20 @@ require "templates/head.php";
 
 
 <script>
+    $(".wyswietlane_uslugi").on('click', 'button', function(e) {
+        var id = $(this).data("id");
 
+        $.ajax({
+            type: "POST",
+            url: "removeServices.php",
+            dataType: 'text',
+            data: {
+                id: id
+            },
+            async: false,
+            success: function(text) {
+                location.reload();
+            }
+        });
+    });
 </script>
