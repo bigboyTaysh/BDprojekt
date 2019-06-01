@@ -61,7 +61,7 @@ require "templates/head.php";
                         <p>Data początkowa: <?php echo $row["data_poczatkowa"]; ?></p>
                         <p>Data końcowa: <?php echo $row["data_koncowa"]; ?></p>
                         <p>Pakiet: <?php echo $row["nazwa"]; ?></p>
-                        <a type="button" target="_blank" href="changeServiceDate.php?id=<?php echo $row["id_uslugi"]; ?>">Edytuj</a>
+                        <a type="button" href="changeServiceDate.php?id=<?php echo $row["id_uslugi"]; ?>">Edytuj</a>
                         <button data-id="<?php echo $row["id_uslugi"]; ?>">Usuń</button>
                     </div>
 
