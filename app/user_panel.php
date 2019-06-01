@@ -61,8 +61,14 @@ require "templates/head.php";
                         <p>Data początkowa: <?php echo $row["data_poczatkowa"]; ?></p>
                         <p>Data końcowa: <?php echo $row["data_koncowa"]; ?></p>
                         <p>Pakiet: <?php echo $row["nazwa"]; ?></p>
+                        <button id="upload" value="500" data-id="<?php echo $row["id_uslugi"]; ?>">500MB</button>
+                        <button id="upload" value="4000" data-id="<?php echo $row["id_uslugi"]; ?>">4GB</button>
+                        <button id="upload" value="5000" data-id="<?php echo $row["id_uslugi"]; ?>">5GB</button>
+                        <button id="upload" value="10000" data-id="<?php echo $row["id_uslugi"]; ?>">10GB</button>
+                        <button id="upload" value="20000" data-id="<?php echo $row["id_uslugi"]; ?>">20GB</button>
+                        </br>
                         <a type="button" href="changeServiceDate.php?id=<?php echo $row["id_uslugi"]; ?>">Edytuj</a>
-                        <button data-id="<?php echo $row["id_uslugi"]; ?>">Usuń</button>
+                        <button id="delete" class="red" data-id="<?php echo $row["id_uslugi"]; ?>">Usuń</button>
                     </div>
 
                 <?php
@@ -83,7 +89,28 @@ require "templates/head.php";
 
 
 <script>
-    $(".wyswietlane_uslugi").on('click', 'button', function(e) {
+    $(".wyswietlane_uslugi").on('click', '#upload', function(e) {
+        var id = $(this).data("id");
+        var upload = $(this).val();
+
+        alert(upload);
+
+        $.ajax({
+            type: "POST",
+            url: "",
+            dataType: 'text',
+            data: {
+                id: id,
+                upload: upload
+            },
+            async: false,
+            success: function(text) {
+                location.reload();
+            }
+        });
+    });
+
+    $(".wyswietlane_uslugi").on('click', '#delete', function(e) {
         var id = $(this).data("id");
 
         $.ajax({

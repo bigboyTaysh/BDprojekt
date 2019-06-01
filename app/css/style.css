@@ -1,46 +1,3 @@
-a {
-    background-color: #44c767;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    display: inline-block;
-    cursor: pointer;
-    color: #ffffff;
-    font-family: Arial;
-    font-size: 17px;
-    padding: 6px 31px;
-    text-decoration: none;
-    text-shadow: 0px 0px 0px #2f6627;
-}
-
-a:hover {
-    background-color: #5cbf2a;
-}
-
-a:active {
-    position: relative;
-    top: 1px;
-}
-
-a.red {
-    background-color: #CC0033;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    display: inline-block;
-    cursor: pointer;
-    color: #ffffff;
-    font-family: Arial;
-    font-size: 17px;
-    padding: 6px 31px;
-    text-decoration: none;
-    text-shadow: 0px 0px 0px #2f6627;
-}
-
-a.red:hover {
-    background-color: #FF0033;
-}
-
 body {
     font-family: 'Times New Roman', Times, serif;
     font-size: 20px;
@@ -153,4 +110,47 @@ select {
     border-radius: 0;
     height: 34px;
     -webkit-appearance: none;
+}
+
+a {
+    background-color: #44c767;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 17px;
+    padding: 6px 31px;
+    text-decoration: none;
+    text-shadow: 0px 0px 0px #2f6627;
+}
+
+a:hover {
+    background-color: #5cbf2a;
+}
+
+a:active {
+    position: relative;
+    top: 1px;
+}
+
+.red {
+    background-color: #CC0033;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 17px;
+    padding: 6px 31px;
+    text-decoration: none;
+    text-shadow: 0px 0px 0px #2f6627;
+}
+
+.red:hover {
+    background-color: #FF0033;
 }
