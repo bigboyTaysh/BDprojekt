@@ -167,7 +167,7 @@ if (isset($_POST['submit'])) {
                                 $days = round($datediff / (60 * 60 * 24));
 
                                 date_default_timezone_set('Europe/Warsaw');
-                                $date = date('Y-m-d H:i:s', time());
+                                $date = date('Y-m-d', time());
 
                                 $sql = "INSERT INTO powiadomienia "
                                     . "( tytul,"

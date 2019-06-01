@@ -56,6 +56,7 @@ require "templates/head.php";
                 foreach ($result as $row) {
                     ?>
                     <div class="wyswietlane_uslugi">
+                        <div id="upload_status"></div>
                         <p>ID usługi: <?php echo $row["id_uslugi"]; ?></p>
                         <p>Rodzaj hostingu: <?php echo $row["nazwa_rodzaju"]; ?></p>
                         <p>Data początkowa: <?php echo $row["data_poczatkowa"]; ?></p>
@@ -92,12 +93,11 @@ require "templates/head.php";
     $(".wyswietlane_uslugi").on('click', '#upload', function(e) {
         var id = $(this).data("id");
         var upload = $(this).val();
-
-        alert(upload);
+        var status;
 
         $.ajax({
             type: "POST",
-            url: "",
+            url: "uploadToService.php",
             dataType: 'text',
             data: {
                 id: id,
@@ -105,9 +105,10 @@ require "templates/head.php";
             },
             async: false,
             success: function(text) {
-                location.reload();
+                status = text;
             }
         });
+        $(this).siblings("#upload_status").text(status);
     });
 
     $(".wyswietlane_uslugi").on('click', '#delete', function(e) {
