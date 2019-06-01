@@ -14,7 +14,7 @@ require "templates/head.php";
 
         $connect = new PDO($servername, $username, $password, $options);
 
-        $sql = "SELECT * FROM powiadomienia WHERE id_uzytkownika = :id_uzytkownika ORDER BY data DESC";
+        $sql = "SELECT * FROM powiadomienia WHERE id_uzytkownika = :id_uzytkownika ORDER BY id_powiadomienia DESC";
 
         $statement = $connect->prepare($sql);
         $statement->bindParam(':id_uzytkownika', $_SESSION['id_uzytkownika'], PDO::PARAM_STR);
