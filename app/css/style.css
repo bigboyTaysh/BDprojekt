@@ -54,7 +54,7 @@ th {
 }
 
 input[type=submit],
-button {
+button:not([class=red]){
     color: #494949 !important;
     text-transform: uppercase;
     background: #ffffff;
@@ -66,7 +66,7 @@ button {
 }
 
 input[type=submit]:hover,
-button:hover {
+button:not([class=red]):hover {
     color: #ffffff !important;
     background: #f6b93b;
     border-color: #f6b93b !important;
@@ -136,7 +136,8 @@ a:active {
     top: 1px;
 }
 
-.red {
+a.red,
+button.red {
     background-color: #CC0033;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -149,8 +150,16 @@ a:active {
     padding: 6px 31px;
     text-decoration: none;
     text-shadow: 0px 0px 0px #2f6627;
+    border: none;
 }
 
-.red:hover {
-    background-color: #FF0033;
+a.red:hover,
+button.red:hover  {
+    background-color: #D34545;
+}
+
+a.red:active,
+button.red:active  {
+    position: relative;
+    top: 1px;
 }

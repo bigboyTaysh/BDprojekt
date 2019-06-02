@@ -17,6 +17,17 @@ $conn->query('SET CHARACTER_SET utf8_polish_ci');
 
 $data = array();
 
+$sql = "SELECT COUNT(*) as total FROM nieaktywne_uslugi WHERE"
+        . " data_koncowa >= '$data_min' AND"
+        . " data_poczatkowa <= '$data_max'";
+/* @var $result type */
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $total = $row['total'];
+    }
+}
+
 $sql = "SELECT COUNT(*) as total FROM uslugi WHERE"
         . " data_koncowa >= '$data_min' AND"
         . " data_poczatkowa <= '$data_max'";
@@ -25,7 +36,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $data[] = array("<tr>"
-            . "<td>Ilość wyników: ". $row['total'] ."</td>"
+            . "<td>Ilość wyników: ". ($total+$row['total']) ."</td>"
             . "</tr>"
             . "<tr>"
             . "<td>ID uslugi</td>"
@@ -33,6 +44,7 @@ if ($result->num_rows > 0) {
             . "<td>data_koncowa</td>"
             . "<td>id_pakietu</td>"
             . "<td>id_serwera</td>"
+            . "<td>status</td>"
             . "</tr>");
     }
 }
@@ -50,6 +62,26 @@ if ($result->num_rows > 0) {
             . "<td>" . $row['data_koncowa'] . "</td>"
             . "<td>" . $row['id_pakietu'] . "</td>"
             . "<td>" . $row['id_serwera'] . "</td>"
+            . "<td>active</td>"
+            . "</tr>"
+            );
+    }
+}
+
+$sql = "SELECT * FROM nieaktywne_uslugi WHERE"
+        . " data_koncowa >= '$data_min' AND"
+        . " data_poczatkowa <= '$data_max'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $data[] = array("<tr>"
+            . "<td>" . $row["id_uslugi"] ."</td>"
+            . "<td>" . $row['data_poczatkowa'] . "</td>"
+            . "<td>" . $row['data_koncowa'] . "</td>"
+            . "<td>" . $row['id_pakietu'] . "</td>"
+            . "<td>" . $row['id_serwera'] . "</td>"
+            . "<td>inactive</td>"
             . "</tr>"
             );
     }

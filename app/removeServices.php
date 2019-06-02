@@ -27,6 +27,11 @@ if ($conn->connect_error) {
         }
     }
 
+    $sql = "INSERT INTO nieaktywne_uslugi (id_uslugi, data_poczatkowa, data_koncowa, id_pakietu, id_serwera)
+                    SELECT id_uslugi, data_poczatkowa, data_koncowa, id_pakietu, id_serwera FROM
+                    uslugi WHERE id_uslugi = $id";
+    $conn->query($sql);
+
     $sql = "SELECT * FROM pakiety WHERE id_pakietu = '$id_pakietu'";
     $result = $conn->query($sql);
 
