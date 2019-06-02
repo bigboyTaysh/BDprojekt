@@ -14,14 +14,12 @@ $conn->query('SET CHARACTER_SET utf8_polish_ci');
 
 $data = array();
 $all = 0;
+
 $data_min = $_POST['data_min'];
 $data_max = $_POST['data_max'];
 
-$sql = "SELECT COUNT(*) AS total FROM "
-        . "(SELECT p.id_pakietu FROM pakiety p LEFT JOIN"
-        . " uslugi u ON p.id_pakietu = u.id_pakietu WHERE"
-        . " (u.data_poczatkowa BETWEEN '$data_min' AND '$data_max')"
-        . " GROUP BY id_pakietu) AS some";
+
+$sql = "SELECT COUNT(*) AS total FROM pakiety";
 /* @var $result type */
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -39,10 +37,18 @@ if ($result->num_rows > 0) {
     }
 }
 
-$sql = "SELECT COUNT(p.id_pakietu) AS total FROM"
-        . " pakiety p LEFT JOIN"
-        . " uslugi u ON p.id_pakietu = u.id_pakietu WHERE"
-        . " (u.data_poczatkowa BETWEEN '$data_min' AND '$data_max')";
+
+$sql = "SELECT COUNT(*) AS total FROM uslugi WHERE data_poczatkowa BETWEEN '$data_min' AND '$data_max'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        
+        $all = $row['total'];
+    }
+}
+
+$sql = "SELECT COUNT(*) AS total FROM nieaktywne_uslugi WHERE data_poczatkowa BETWEEN '$data_min' AND '$data_max'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -52,10 +58,14 @@ if ($result->num_rows > 0) {
     }
 }
 
-$sql = "SELECT p.*, COUNT(p.id_pakietu) AS total FROM"
-        . " pakiety p LEFT JOIN"
-        . " uslugi u ON p.id_pakietu = u.id_pakietu WHERE"
-        . " (u.data_poczatkowa BETWEEN '$data_min' AND '$data_max') GROUP BY id_pakietu";
+$sql = "SELECT p.*, 
+((SELECT COUNT(*) from uslugi u WHERE p.id_pakietu = u.id_pakietu AND
+ (u.data_poczatkowa BETWEEN '$data_min' AND '$data_max'))
+ + 
+(SELECT COUNT(*) from nieaktywne_uslugi u WHERE p.id_pakietu = u.id_pakietu AND
+ (u.data_poczatkowa BETWEEN '$data_min' AND '$data_max')))
+ as total FROM pakiety p";
+
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -68,29 +78,12 @@ if ($result->num_rows > 0) {
             . "<td>" . $row['wartosc'] . "</td>"
             . "<td>" . $row['max_pamiec'] . "</td>"
             . "<td>" . $row['total'] . "</td>"
-            . "<td>" . $procent . "%</td>"
+            . "<td>" . round($procent,2) . "%</td>"
             . "</tr>"
         );
     }
 }
 
-//$sql = "SELECT * FROM pakiety WHERE"
-//        . " id_pakietu NOT IN (SELECT id_pakietu FROM uslugi)";
-//$result = $conn->query($sql);
-//
-//if ($result->num_rows > 0) {
-//    while ($row = $result->fetch_assoc()) {
-//        $data[] = array("<tr>"
-//            . "<td>" . $row["id_pakietu"] . "</td>"
-//            . "<td>" . $row['nazwa'] . "</td>"
-//            . "<td>" . $row['wartosc'] . "</td>"
-//            . "<td>" . $row['max_pamiec'] . "</td>"
-//            . "<td>0</td>"
-//            . "<td>0%</td>"
-//            . "</tr>"
-//        );
-//    }
-//}
 echo json_encode($data);
 $conn->close();
 ?>
