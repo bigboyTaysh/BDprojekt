@@ -29,6 +29,7 @@ require "templates/head.php";
             foreach ($result as $row) {
                 ?>
                 <p class="welcome">Witaj <?php echo $row['login']; ?></p>
+                <div id="upload_status"></div>
                 <p>Twoje aktywne usługi:</p>
             <?php
         }
@@ -55,8 +56,8 @@ require "templates/head.php";
             if ($result && $statement->rowCount() > 0) {
                 foreach ($result as $row) {
                     ?>
-                    <div class="wyswietlane_uslugi">
-                        <div id="upload_status"></div>
+                    <div class="wyswietlane_uslugi" data-id="<?php echo $row["id_uslugi"]; ?>">
+                        <p>Zajętego miejsca <?php echo $row["zajeta_pamiec"]; ?> z <?php echo $row['max_pamiec']; ?></p>
                         <p>ID usługi: <?php echo $row["id_uslugi"]; ?></p>
                         <p>Rodzaj hostingu: <?php echo $row["nazwa_rodzaju"]; ?></p>
                         <p>Data początkowa: <?php echo $row["data_poczatkowa"]; ?></p>
@@ -90,6 +91,7 @@ require "templates/head.php";
 
 
 <script>
+
     $(".wyswietlane_uslugi").on('click', '#upload', function(e) {
         var id = $(this).data("id");
         var upload = $(this).val();
@@ -108,7 +110,16 @@ require "templates/head.php";
                 status = text;
             }
         });
-        $(this).siblings("#upload_status").text(status);
+
+        $(".wyswietlane_uslugi[data-id='" + id + "']").load(" .wyswietlane_uslugi[data-id='" + id + "'] > *");
+        if(status.indexOf("Pomyślnie")){
+            $("#upload_status").text(status);
+            $("#upload_status").css({ 'color': 'red', 'font-size': '30px' });
+        } else {
+            $("#upload_status").text(status);
+            $("#upload_status").css({ 'color': 'green', 'font-size': '30px' });
+        }
+        
     });
 
     $(".wyswietlane_uslugi").on('click', '#delete', function(e) {
