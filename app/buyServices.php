@@ -105,8 +105,11 @@ if (isset($_POST['submit'])) {
         if ($result && $statement->rowCount() > 0) {
             foreach ($result as $row) {
                 $max_pamiec = $row['max_pamiec'];
+                $zajeta_pamiec = $row['zajeta_pamiec'];
             }
         }
+
+        $sql = "SELECT * FROM serwery WHERE id_serwera = $id_serwera";
 
         $statement = $connect->prepare($sql);
         $statement->execute();
@@ -115,6 +118,7 @@ if (isset($_POST['submit'])) {
         if ($result && $statement->rowCount() > 0) {
             foreach ($result as $row) {
                 $zajeta_pamiec = $row['zajeta_pamiec'];
+                $pojemnosc = $row['pojemnosc'];
             }
         }
 
@@ -123,6 +127,35 @@ if (isset($_POST['submit'])) {
 
         $statement = $connect->prepare($sql);
         $statement->execute();
+
+        if ((($zajeta_pamiec + $max_pamiec) / $pojemnosc * 100) > 80) {
+
+            $sql = "SELECT id_uzytkownika FROM uzytkownicy u NATURAL JOIN rodzaj_konta r WHERE nazwa LIKE 'admin'";
+
+            $statement = $connect->prepare($sql);
+            $statement->execute();
+            $result = $statement->fetchAll();
+
+            if ($result && $statement->rowCount() > 0) {
+                foreach ($result as $row) {
+                    $sql = "INSERT INTO powiadomienia "
+                        . "( tytul,"
+                        . " tresc,"
+                        . " data,"
+                        . " id_uzytkownika"
+                        . ")"
+                        . " VALUES ("
+                        . " 'Pamięć serwera kończy się',"
+                        . " 'Pamięć serwera o ID " . $id_serwera . " jest zapełnione w ponad 80%!',"
+                        . " CURRENT_DATE(),"
+                        . " '" . $row['id_uzytkownika'] . "'"
+                        . ")";
+
+                    $statement = $connect->prepare($sql);
+                    $statement->execute();
+                }
+            }
+        }
 
 
         date_default_timezone_set('Europe/Warsaw');
@@ -196,7 +229,7 @@ if (isset($_POST['submit'])) {
 
         var response;
         var id = $("#pakiet").val();
-        
+
         $.ajax({
             type: "POST",
             url: "packet_content.php",
@@ -210,7 +243,7 @@ if (isset($_POST['submit'])) {
                 $('#max_pamiec').prepend('<div>Pojemność: ' + text + 'GB</div>');
             }
         });
-        
+
     });
 
     $(document).on('change', '#pakiet, #dlugosc', function() {
@@ -236,6 +269,6 @@ if (isset($_POST['submit'])) {
                 $('#max_pamiec').prepend('<div>Pojemność: ' + text + 'GB</div>');
             }
         });
-        
+
     });
 </script>

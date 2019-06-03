@@ -57,7 +57,7 @@ require "templates/head.php";
                 foreach ($result as $row) {
                     ?>
                     <div class="wyswietlane_uslugi" data-id="<?php echo $row["id_uslugi"]; ?>">
-                        <p>Zajętego miejsca <?php echo $row["zajeta_pamiec"]; ?> z <?php echo $row['max_pamiec']; ?></p>
+                        <p>Zajętego miejsca <?php echo (($row['zajeta_pamiec'])/1000) . " GB"; ?> z <?php echo (($row['max_pamiec'])/1000) . " GB"; ?></p>
                         <p>ID usługi: <?php echo $row["id_uslugi"]; ?></p>
                         <p>Rodzaj hostingu: <?php echo $row["nazwa_rodzaju"]; ?></p>
                         <p>Data początkowa: <?php echo $row["data_poczatkowa"]; ?></p>

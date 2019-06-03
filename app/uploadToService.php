@@ -41,6 +41,7 @@ if ($conn->connect_error) {
             . " zajeta_pamiec = '".($zajeta_pamiec + $upload)."'"
             . " WHERE id_uslugi = $id";
         $conn->query($sql);
+
         echo "Pomyślnie dodano dane!";
     } else {
         echo "Nie udało się dodać danych, brak miejsca!";
