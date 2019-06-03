@@ -27,6 +27,7 @@ require "templates/head.php";
             }
         }
 
+        // wyświetlanie serwerów które są wstanie przyjąć usługę w pakiecie o największej pojemności 
         $sql = "SELECT * FROM serwery NATURAL JOIN rodzaj_serwera WHERE
             (zajeta_pamiec / pojemnosc * 100 ) < ((pojemnosc-'$max_pamiec') / pojemnosc * 100) GROUP BY id_rodzaju";
 
@@ -122,6 +123,8 @@ if (isset($_POST['submit'])) {
             }
         }
 
+
+
         $sql = "UPDATE serwery SET
                 zajeta_pamiec = zajeta_pamiec + $max_pamiec WHERE id_serwera = $id_serwera";
 
@@ -146,7 +149,7 @@ if (isset($_POST['submit'])) {
                         . ")"
                         . " VALUES ("
                         . " 'Pamięć serwera kończy się',"
-                        . " 'Pamięć serwera o ID " . $id_serwera . " jest zapełnione w ponad 80%!',"
+                        . " 'Pamięć serwera o ID " . $id_serwera . " jest zapełnione w ponad ".((($zajeta_pamiec + $max_pamiec)/$pojemnosc)*100)."%!',"
                         . " CURRENT_DATE(),"
                         . " '" . $row['id_uzytkownika'] . "'"
                         . ")";

@@ -3,9 +3,22 @@ session_start();
 if ($_SESSION['zalogowany'] !== true) {
     header('Location: login.php');
 }
-require "templates/head.php";
 ?>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Panel</title>
+        <link rel="stylesheet" href="css/style.css" type="text/css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <body>
 
+        <div class="topnav">
+            <a class="menu" href="admin_panel.php">Panel administratora</a>
+            <a class="menu" href="admin_notification.php">Powiadomienia</a>
+            <a class="menu" href="admin_report.php">Raporty</a>
+            <a class="profil" href="logout.php">Wyloguj</a>
+        </div>
 <div class="main">
     <?php
     try {
