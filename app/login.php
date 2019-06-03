@@ -106,7 +106,7 @@ if (isset($_POST['submit'])) {
         $connect = new PDO($servername, $username, $password, $options);
 
         $sql = "SELECT *
-        FROM uzytkownicy
+        FROM uzytkownicy NATURAL JOIN rodzaj_konta
         WHERE login = :login AND
         haslo = :haslo";
 
@@ -136,7 +136,18 @@ if (isset($_POST['submit'])) {
             $_SESSION['zalogowany'] = true;
             $_SESSION['id_uzytkownika'] = $row['id_uzytkownika'];
 
-            if ($row['id_rodzaju'] == 1) {
+            $sql = "SELECT * FROM rodzaj_konta WHERE nazwa REGEXP 'admin'";
+            $statement = $connect->prepare($sql);
+            $statement->execute();
+            $result = $statement->fetchAll();
+
+            if ($result && $statement->rowCount() > 0) {
+                foreach ($result as $row) {
+                    $id_rodzaju = $row['id_rodzaju'];
+                }
+            }
+
+            if ($row['id_rodzaju'] == $id_rodzaju) {
                 header('Location: admin_panel.php');
             } else {
                 try {
