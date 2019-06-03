@@ -33,7 +33,7 @@ require "templates/head.php";
                         <p><?php echo $row["tytul"]; ?></p>
                         <p><?php echo $row["data"]; ?></p>
                         <p><?php echo $row["tresc"]; ?></p>
-                        <p><a href="delete_notification.php?id=<?php echo $row['id_powiadomienia']; ?>">Usuń</a></p>
+                        <p><a id="remove" data-id=<?php echo $row['id_powiadomienia']; ?>>Usuń</a></p>
                     </div>
                 <?php
             }
@@ -54,5 +54,20 @@ require "templates/head.php";
 
 
 <script>
+    $("#remove").on('click', function(e) {
+        var id = $(this).data("id");
 
+        $.ajax({
+            type: "POST",
+            url: "removeNotification.php",
+            dataType: 'text',
+            data: {
+                id: id
+            },
+            async: false,
+            success: function(text) {
+                location.reload();
+            }
+        });
+    });
 </script>

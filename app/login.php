@@ -147,7 +147,7 @@ if (isset($_POST['submit'])) {
                 }
             }
 
-            if ($row['id_rodzaju'] == $id_rodzaju) {
+            if ($_SESSION['id_uzytkownika'] == $id_rodzaju) {
                 header('Location: admin_panel.php');
             } else {
                 try {

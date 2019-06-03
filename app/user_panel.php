@@ -57,7 +57,7 @@ require "templates/head.php";
                 foreach ($result as $row) {
                     ?>
                     <div class="wyswietlane_uslugi" data-id="<?php echo $row["id_uslugi"]; ?>">
-                        <p>Zajętego miejsca <?php echo (($row['zajeta_pamiec'])/1000) . " GB"; ?> z <?php echo (($row['max_pamiec'])/1000) . " GB"; ?></p>
+                        <p>Zajętego miejsca <?php echo (($row['zajeta_pamiec']) / 1000) . " GB"; ?> z <?php echo (($row['max_pamiec']) / 1000) . " GB"; ?></p>
                         <p>ID usługi: <?php echo $row["id_uslugi"]; ?></p>
                         <p>Rodzaj hostingu: <?php echo $row["nazwa_rodzaju"]; ?></p>
                         <p>Data początkowa: <?php echo $row["data_poczatkowa"]; ?></p>
@@ -75,12 +75,19 @@ require "templates/head.php";
 
                 <?php
             }
-        }
-        ?>
+        } else {
+            ?>
+                <p>Brak usług</p>
 
-        </div>
+            </div>
 
-    <?php
+        <?php
+    }
+    ?>
+
+    </div>
+
+<?php
 } catch (PDOException $error) {
     echo $sql . "<br>" . $error->getMessage();
 }
@@ -91,7 +98,6 @@ require "templates/head.php";
 
 
 <script>
-
     $(".wyswietlane_uslugi").on('click', '#upload', function(e) {
         var id = $(this).data("id");
         var upload = $(this).val();
@@ -112,14 +118,20 @@ require "templates/head.php";
         });
 
         $(".wyswietlane_uslugi[data-id='" + id + "']").load(" .wyswietlane_uslugi[data-id='" + id + "'] > *");
-        if(status.indexOf("Pomyślnie")){
+        if (status.indexOf("Pomyślnie")) {
             $("#upload_status").text(status);
-            $("#upload_status").css({ 'color': 'red', 'font-size': '30px' });
+            $("#upload_status").css({
+                'color': 'red',
+                'font-size': '30px'
+            });
         } else {
             $("#upload_status").text(status);
-            $("#upload_status").css({ 'color': 'green', 'font-size': '30px' });
+            $("#upload_status").css({
+                'color': 'green',
+                'font-size': '30px'
+            });
         }
-        
+
     });
 
     $(".wyswietlane_uslugi").on('click', '#delete', function(e) {
