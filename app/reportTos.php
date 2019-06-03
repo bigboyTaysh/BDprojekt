@@ -17,6 +17,8 @@ $all = 0;
 $data_min = $_POST['data_min'];
 $data_max = $_POST['data_max'];
 
+/*
+
 $sql = "SELECT COUNT(*) AS total FROM "
     . "(SELECT r.id_rodzaju FROM rodzaj_serwera r LEFT JOIN"
     . " serwery s ON r.id_rodzaju = s.id_rodzaju LEFT JOIN"
@@ -24,7 +26,11 @@ $sql = "SELECT COUNT(*) AS total FROM "
     . " (u.data_poczatkowa BETWEEN '$data_min' AND '$data_max') GROUP BY"
     . " r.id_rodzaju) as some";
 
+    */
 /* @var $result type */
+
+$sql = "SELECT COUNT(*) AS total FROM rodzaj_serwera";
+
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -40,44 +46,33 @@ if ($result->num_rows > 0) {
     }
 }
 
-$sql = "SELECT COUNT(id_uslugi)"
-    . " AS total FROM rodzaj_serwera r LEFT JOIN"
-    . " serwery s ON r.id_rodzaju = s.id_rodzaju LEFT JOIN"
-    . " uslugi u ON s.id_serwera = u.id_serwera WHERE"
-    . " (u.data_poczatkowa BETWEEN '$data_min' AND '$data_max')";
+$sql = "SELECT COUNT(*) AS total FROM uslugi WHERE data_poczatkowa BETWEEN '$data_min' AND '$data_max'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
+        
+        $all = $row['total'];
+    }
+}
+
+$sql = "SELECT COUNT(*) AS total FROM nieaktywne_uslugi WHERE data_poczatkowa BETWEEN '$data_min' AND '$data_max'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        
         $all = $all + $row['total'];
     }
 }
 
-
-
-$sql = "SELECT p.*, 
-((SELECT COUNT(*) from uslugi u WHERE p.id_pakietu = u.id_pakietu AND
+$sql = "SELECT r.*, 
+((SELECT COUNT(*) from uslugi u, serwery s WHERE r.id_rodzaju = s.id_rodzaju AND s.id_serwera = u.id_serwera AND
  (u.data_poczatkowa BETWEEN '$data_min' AND '$data_max'))
  + 
-(SELECT COUNT(*) from nieaktywne_uslugi u WHERE p.id_pakietu = u.id_pakietu AND
+(SELECT COUNT(*) from nieaktywne_uslugi u, serwery s WHERE r.id_rodzaju = s.id_rodzaju AND s.id_serwera = u.id_serwera AND
  (u.data_poczatkowa BETWEEN '$data_min' AND '$data_max')))
- as total FROM pakiety p";
-
-
-$sql = "SELECT r.*, COUNT(id_uslugi)"
-    . " AS total FROM rodzaj_serwera r LEFT JOIN"
-    . " serwery s ON r.id_rodzaju = s.id_rodzaju LEFT JOIN"
-    . " uslugi u ON s.id_serwera = u.id_serwera WHERE"
-    . " (u.data_poczatkowa BETWEEN '$data_min' AND '$data_max') FROM rodzaj_serwera ";
-
-
-$sql = "SELECT r.*,
-    ((SELECT COUNT(*) from serwery s INNER JOIN uslugi u using(id_serwera) WHERE r.id_rodzaju = s.id_rodzaju AND
-    (u.data_poczatkowa BETWEEN '$data_min' AND '$data_max'))
-    + 
-    ((SELECT COUNT(*) from serwery s INNER JOIN nieaktywne_uslugi u using(id_serwera) WHERE r.id_rodzaju = s.id_rodzaju AND
-    (u.data_poczatkowa BETWEEN '$data_min' AND '$data_max'))
-    (u.data_poczatkowa BETWEEN '$data_min' AND '$data_max') FROM rodzaj_serwera r";
+ as total FROM rodzaj_serwera r";
 
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -89,7 +84,7 @@ if ($result->num_rows > 0) {
                 . "<td>" . $row["id_rodzaju"] . "</td>"
                 . "<td>" . $row['nazwa_rodzaju'] . "</td>"
                 . "<td>" . $row['total'] . "</td>"
-                . "<td>" . $procent . "%</td>"
+                . "<td>" . round($procent,2) . "%</td>"
                 . "</tr>"
         );
     }
