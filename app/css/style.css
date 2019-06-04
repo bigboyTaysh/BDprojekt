@@ -110,6 +110,11 @@ button:not([class=red]):hover {
     height: 300px;
 }
 
+#wynik_uslugi_1 {
+    border-top: 3px solid black;
+}
+
+
 .inmain::-webkit-scrollbar,
 .inmain2::-webkit-scrollbar { 
     width: 0 !important

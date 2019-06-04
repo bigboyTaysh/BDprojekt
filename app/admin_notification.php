@@ -44,7 +44,7 @@ if ($_SESSION['zalogowany'] !== true) {
                 if ($result && $statement->rowCount() > 0) {
                     foreach ($result as $row) {
                         ?>
-                        <div class="notification">
+                        <div class="wyswietlane_powiadnomienia">
                             <p><?php echo $row["tytul"]; ?></p>
                             <p><?php echo $row["data"]; ?></p>
                             <p><?php echo $row["tresc"]; ?></p>

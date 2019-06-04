@@ -31,6 +31,7 @@ if ($result->num_rows > 0) {
             'nazwisko' => $row['nazwisko'],
             'email' => $row['email'],
             'telefon' => $row['telefon'],
+            'data' => $row['data_dolaczenia'],
             'nazwa' => $row['nazwa']
                 );
     }

@@ -209,7 +209,7 @@ if (isset($_POST['submit'])) {
         }
     } else {
         ?>
-        <blockquote>Podane dane są nieprawidłowe</blockquote>
+        <blockquote style="color: red;">Podane dane są nieprawidłowe</blockquote>
     <?php }
 }
 ?>
