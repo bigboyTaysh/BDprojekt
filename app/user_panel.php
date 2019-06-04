@@ -98,6 +98,11 @@ require "templates/head.php";
 
 
 <script>
+    
+    $(document).ready(function() {
+        $('a:contains("Panel")').addClass("clicked");
+    });
+
     $(".wyswietlane_uslugi").on('click', '#upload', function(e) {
         var id = $(this).data("id");
         var upload = $(this).val();

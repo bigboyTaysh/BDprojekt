@@ -10,10 +10,10 @@
 <body>
 
     <div class="topnav">
-        <a class="menu" href="admin_panel.php">Panel administratora</a>
-        <a class="menu" href="admin_notification.php">Powiadomienia</a>
-        <a class="menu" href="admin_report.php">Raporty</a>
-        <a class="profil" href="logout.php">Wyloguj</a>
+        <a class="clicked" href="admin_panel.php">Panel administratora</a>
+        <a href="admin_notification.php">Powiadomienia</a>
+        <a href="admin_report.php">Raporty</a>
+        <a class="red" href="logout.php">Wyloguj</a>
     </div>
 
     <div class="main">

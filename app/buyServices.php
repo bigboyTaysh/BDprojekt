@@ -226,6 +226,10 @@ if (isset($_POST['submit'])) {
 
 <script>
     $(document).ready(function() {
+        $('a:contains("Kup usługę")').addClass("clicked");
+    });
+
+    $(document).ready(function() {
         var pakietVal = $("#pakiet").children(":selected").attr("id");
         var dlugosc = document.getElementById("dlugosc");
         var dlugoscVal = dlugosc.options[dlugosc.selectedIndex].value;

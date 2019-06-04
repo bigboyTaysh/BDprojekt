@@ -122,3 +122,9 @@ require "templates/head.php";
 </div>
 </br>
 <?php require "templates/tail.php"; ?>
+
+<script>
+    $(document).ready(function() {
+        $('a:contains("Ustawienia")').addClass("clicked");
+    });
+</script>

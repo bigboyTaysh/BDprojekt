@@ -15,9 +15,9 @@
 <body>
 
 <div class="topnav">
-    <a class="menu" href="user_panel.php">Panel</a>
-    <a class="menu" href="buyServices.php">Kup usługę</a>
-    <a class="menu" href="notification.php">Powiadomienia</a>
-    <a class="menu" href="changePersonalData.php">Ustawienia</a>
+    <a href="user_panel.php">Panel</a>
+    <a href="buyServices.php">Kup usługę</a>
+    <a href="notification.php">Powiadomienia</a>
+    <a href="changePersonalData.php">Ustawienia</a>
     <a class="red" href="logout.php">Wyloguj</a>
 </div>

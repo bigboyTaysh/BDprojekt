@@ -29,11 +29,11 @@ require "templates/head.php";
             if ($result && $statement->rowCount() > 0) {
                 foreach ($result as $row) {
                     ?>
-                    <div class="notification">
+                    <div class="wyswietlane_powiadnomienia">
                         <p><?php echo $row["tytul"]; ?></p>
                         <p><?php echo $row["data"]; ?></p>
                         <p><?php echo $row["tresc"]; ?></p>
-                        <p><a id="remove" data-id=<?php echo $row['id_powiadomienia']; ?>>Usuń</a></p>
+                        <p><a class="red" id="remove" data-id=<?php echo $row['id_powiadomienia']; ?>>Usuń</a></p>
                     </div>
                 <?php
             }
@@ -54,6 +54,10 @@ require "templates/head.php";
 
 
 <script>
+    $(document).ready(function() {
+        $('a:contains("Powiadomienia")').addClass("clicked");
+    });
+
     $("#remove").on('click', function(e) {
         var id = $(this).data("id");
 

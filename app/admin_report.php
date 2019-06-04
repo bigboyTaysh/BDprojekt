@@ -5,61 +5,62 @@ if ($_SESSION['zalogowany'] !== true) {
 }
 ?>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Raport</title>
-        <link rel="stylesheet" href="css/style.css" type="text/css"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
-        <meta charset="UTF-8">	
-    </head>
 
-    <body>	
-        <div class="topnav">
-            <a class="menu" href="admin_panel.php">Panel administratora</a>
-            <a class="menu" href="admin_notification.php">Powiadomienia</a>
-            <a class="menu" href="admin_report.php">Raporty</a>
-            <a class="profil" href="logout.php">Wyloguj</a>
-        </div>
+<head>
+    <meta charset="UTF-8">
+    <title>Raport</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+</head>
 
-        <div class="main">
-            <div class="inmain">
-                <div id="button-wrapper">
-                    <input type="radio" id="radio_1" name="rodzaj" checked>
-                    Serwery zapełnione od <input id="procent_serwery_min" type="number" min="0" max="99" value="0">% do 
-                    <input id="procent_serwery_max" type="number" min="0" max="100" value="100">%<br>
-                    <input type="radio" id="radio_2" name="rodzaj">
-                    Użytkownicy, którzy dołączyli po <input type="date" id="user_data_min" min="2018-01-01">, a przed
-                    <input type="date" id="user_data_max"><br>
-                    <input type="radio" id="radio_3" name="rodzaj">Aktywne usługi między
-                    <input type="date" id="service_data_min" min="2018-01-01"> a
-                    <input type="date" id="service_data_max"></br>
-                    <input type="radio" id="radio_4" name="rodzaj">Najczęściej kupowane pakiety</br>
-                    <input type="radio" id="radio_5" name="rodzaj">Najczęściej kupowane pakiety między
-                    <input type="date" id="packet_data_min" min="2018-01-01"> a <input type="date" id="packet_data_max"></br>
-                    <input type="radio" id="radio_6" name="rodzaj">Najczęściej wybierany rodzaj hostingu</br>
-                    <input type="radio" id="radio_7" name="rodzaj">Najczęściej wybierany rodzaj hostingu między 
-                    <input type="date" id="tos_data_min" min="2018-01-01"> a <input type="date" id="tos_data_max"></br>
-                    </br><button class="button" id="generate">Generuj raport</button>
-                    <button class="button" id="clean">Wyczyść</button></br></br>
-                </div>
-                <div class="table-wrapper">
-                    <table id='wynik'></table>
-                </div>
-                <br/>
+<body>
+    <div class="topnav">
+        <a href="admin_panel.php">Panel administratora</a>
+        <a href="admin_notification.php">Powiadomienia</a>
+        <a class="clicked" href="admin_report.php">Raporty</a>
+        <a class="red" href="logout.php">Wyloguj</a>
+    </div>
+
+    <div class="main">
+        <div class="inmain">
+            <div id="button-wrapper">
+                <input type="radio" id="radio_1" name="rodzaj" checked>
+                Serwery zapełnione od <input id="procent_serwery_min" type="number" min="0" max="99" value="0">% do
+                <input id="procent_serwery_max" type="number" min="0" max="100" value="100">%<br>
+                <input type="radio" id="radio_2" name="rodzaj">
+                Użytkownicy, którzy dołączyli po <input type="date" id="user_data_min" min="2018-01-01">, a przed
+                <input type="date" id="user_data_max"><br>
+                <input type="radio" id="radio_3" name="rodzaj">Aktywne usługi między
+                <input type="date" id="service_data_min" min="2018-01-01"> a
+                <input type="date" id="service_data_max"></br>
+                <input type="radio" id="radio_4" name="rodzaj">Najczęściej kupowane pakiety</br>
+                <input type="radio" id="radio_5" name="rodzaj">Najczęściej kupowane pakiety między
+                <input type="date" id="packet_data_min" min="2018-01-01"> a <input type="date" id="packet_data_max"></br>
+                <input type="radio" id="radio_6" name="rodzaj">Najczęściej wybierany rodzaj hostingu</br>
+                <input type="radio" id="radio_7" name="rodzaj">Najczęściej wybierany rodzaj hostingu między
+                <input type="date" id="tos_data_min" min="2018-01-01"> a <input type="date" id="tos_data_max"></br>
+                </br><button class="button" id="generate">Generuj raport</button>
+                <button class="button" id="clean">Wyczyść</button></br></br>
             </div>
+            <div class="table-wrapper">
+                <table id='wynik'></table>
+            </div>
+            <br />
         </div>
-    </body>
+    </div>
+</body>
+
 </html>
 
 <script>
-
-    Date.prototype.toDateInputValue = (function () {
+    Date.prototype.toDateInputValue = (function() {
         var local = new Date(this);
         local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
         return local.toJSON().slice(0, 10);
     });
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('#user_data_min').val(new Date().toDateInputValue());
         $('#user_data_max').val(new Date().toDateInputValue());
         $('#service_data_min').val(new Date().toDateInputValue());
@@ -80,11 +81,11 @@ if ($_SESSION['zalogowany'] !== true) {
         return count;
     }
 
-    $("#button-wrapper").on('click', '#clean', function (e) {
+    $("#button-wrapper").on('click', '#clean', function(e) {
         $('#wynik').empty();
     });
 
-    $("#button-wrapper").on('click', '#generate', function (e) {
+    $("#button-wrapper").on('click', '#generate', function(e) {
         $('#wynik').empty();
 
         if ($('#radio_1').is(':checked')) {
@@ -101,7 +102,7 @@ if ($_SESSION['zalogowany'] !== true) {
                         procent_max: procent_max
                     },
                     async: false,
-                    success: function (text) {
+                    success: function(text) {
                         if (text !== null) {
                             for (var i = 0; i < countProperties(text); i++) {
                                 if (text !== null) {
@@ -132,7 +133,7 @@ if ($_SESSION['zalogowany'] !== true) {
                         data_max: data_max
                     },
                     async: false,
-                    success: function (text) {
+                    success: function(text) {
                         if (text !== null) {
                             for (var i = 0; i < countProperties(text); i++) {
                                 if (text !== null) {
@@ -162,7 +163,7 @@ if ($_SESSION['zalogowany'] !== true) {
                     data_max: data_max
                 },
                 async: false,
-                success: function (text) {
+                success: function(text) {
                     if (text !== null) {
                         for (var i = 0; i < countProperties(text); i++) {
                             if (text !== null) {
@@ -181,7 +182,7 @@ if ($_SESSION['zalogowany'] !== true) {
         } else if ($('#radio_4').is(':checked')) {
             var data_min = "2018-01-01";
             var data_max = "3000-12-31";
-            
+
             $.ajax({
                 type: "POST",
                 url: "reportPackets.php",
@@ -191,7 +192,7 @@ if ($_SESSION['zalogowany'] !== true) {
                     data_max: data_max
                 },
                 async: false,
-                success: function (text) {
+                success: function(text) {
                     if (text !== null) {
                         for (var i = 0; i < countProperties(text); i++) {
                             if (text !== null) {
@@ -221,7 +222,7 @@ if ($_SESSION['zalogowany'] !== true) {
                     data_max: data_max
                 },
                 async: false,
-                success: function (text) {
+                success: function(text) {
                     if (text !== null) {
                         for (var i = 0; i < countProperties(text); i++) {
                             if (text !== null) {
@@ -246,12 +247,12 @@ if ($_SESSION['zalogowany'] !== true) {
                 type: "POST",
                 url: "reportTos.php",
                 dataType: 'JSON',
-                data : {
+                data: {
                     data_min: data_min,
                     data_max: data_max
                 },
                 async: false,
-                success: function (text) {
+                success: function(text) {
                     if (text !== null) {
                         for (var i = 0; i < countProperties(text); i++) {
                             if (text !== null) {
@@ -264,13 +265,13 @@ if ($_SESSION['zalogowany'] !== true) {
                         }
                     } else {
                         $('#wynik').append('No results!');
-                        
+
                     }
                 }
             });
-            
+
             sortTable(3);
-            
+
         } else if ($('#radio_7').is(':checked')) {
             var data_min = $("#tos_data_min").val();
             var data_max = $("#tos_data_max").val();
@@ -279,12 +280,12 @@ if ($_SESSION['zalogowany'] !== true) {
                 type: "POST",
                 url: "reportTos.php",
                 dataType: 'JSON',
-                data : {
+                data: {
                     data_min: data_min,
                     data_max: data_max
                 },
                 async: false,
-                success: function (text) {
+                success: function(text) {
                     if (text !== null) {
                         for (var i = 0; i < countProperties(text); i++) {
                             if (text !== null) {
@@ -297,7 +298,7 @@ if ($_SESSION['zalogowany'] !== true) {
                         }
                     } else {
                         $('#wynik').append('No results!');
-                        
+
                     }
                 }
             });
@@ -343,5 +344,4 @@ if ($_SESSION['zalogowany'] !== true) {
             }
         }
     }
-
 </script>

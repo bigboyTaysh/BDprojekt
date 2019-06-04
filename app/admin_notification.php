@@ -5,81 +5,83 @@ if ($_SESSION['zalogowany'] !== true) {
 }
 ?>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Panel</title>
-        <link rel="stylesheet" href="css/style.css" type="text/css"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    </head>
-    <body>
 
-        <div class="topnav">
-            <a class="menu" href="admin_panel.php">Panel administratora</a>
-            <a class="menu" href="admin_notification.php">Powiadomienia</a>
-            <a class="menu" href="admin_report.php">Raporty</a>
-            <a class="profil" href="logout.php">Wyloguj</a>
-        </div>
-<div class="main">
-    <?php
-    try {
-        require "../config.php";
-        require "../lib/lib.php";
+<head>
+    <meta charset="UTF-8">
+    <title>Panel</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
 
-        $connect = new PDO($servername, $username, $password, $options);
+<body>
 
-        $sql = "SELECT * FROM powiadomienia WHERE id_uzytkownika = :id_uzytkownika ORDER BY id_powiadomienia DESC";
+    <div class="topnav">
+        <a href="admin_panel.php">Panel administratora</a>
+        <a class="clicked" href="admin_notification.php">Powiadomienia</a>
+        <a href="admin_report.php">Raporty</a>
+        <a class="red" href="logout.php">Wyloguj</a>
+    </div>
+    <div class="main">
+        <?php
+        try {
+            require "../config.php";
+            require "../lib/lib.php";
 
-        $statement = $connect->prepare($sql);
-        $statement->bindParam(':id_uzytkownika', $_SESSION['id_uzytkownika'], PDO::PARAM_STR);
-        $statement->execute();
+            $connect = new PDO($servername, $username, $password, $options);
 
-        $result = $statement->fetchAll();
-        ?>
+            $sql = "SELECT * FROM powiadomienia WHERE id_uzytkownika = :id_uzytkownika ORDER BY id_powiadomienia DESC";
 
-        <div class="inmain">
+            $statement = $connect->prepare($sql);
+            $statement->bindParam(':id_uzytkownika', $_SESSION['id_uzytkownika'], PDO::PARAM_STR);
+            $statement->execute();
 
-            <?php
-            if ($result && $statement->rowCount() > 0) {
-                foreach ($result as $row) {
-                    ?>
-                    <div class="notification">
-                        <p><?php echo $row["tytul"]; ?></p>
-                        <p><?php echo $row["data"]; ?></p>
-                        <p><?php echo $row["tresc"]; ?></p>
-                        <p><a id="remove" data-id=<?php echo $row['id_powiadomienia']; ?>>Usuń</a></p>
-                    </div>
+            $result = $statement->fetchAll();
+            ?>
+
+            <div class="inmain">
+
                 <?php
+                if ($result && $statement->rowCount() > 0) {
+                    foreach ($result as $row) {
+                        ?>
+                        <div class="notification">
+                            <p><?php echo $row["tytul"]; ?></p>
+                            <p><?php echo $row["data"]; ?></p>
+                            <p><?php echo $row["tresc"]; ?></p>
+                            <p><a id="remove" data-id=<?php echo $row['id_powiadomienia']; ?>>Usuń</a></p>
+                        </div>
+                    <?php
+                }
             }
-        }
-        ?>
+            ?>
 
-        </div>
+            </div>
 
-    <?php
-} catch (PDOException $error) {
-    echo $sql . "<br>" . $error->getMessage();
-}
-?>
+        <?php
+    } catch (PDOException $error) {
+        echo $sql . "<br>" . $error->getMessage();
+    }
+    ?>
 
-</div>
-</br>
-<?php require "templates/tail.php"; ?>
+    </div>
+    </br>
+    <?php require "templates/tail.php"; ?>
 
 
-<script>
-$("#remove").on('click', function(e) {
-        var id = $(this).data("id");
-        $.ajax({
-            type: "POST",
-            url: "removeNotification.php",
-            dataType: 'text',
-            data: {
-                id: id
-            },
-            async: false,
-            success: function(text) {
-                location.reload();
-            }
+    <script>
+        $("#remove").on('click', function(e) {
+            var id = $(this).data("id");
+            $.ajax({
+                type: "POST",
+                url: "removeNotification.php",
+                dataType: 'text',
+                data: {
+                    id: id
+                },
+                async: false,
+                success: function(text) {
+                    location.reload();
+                }
+            });
         });
-    });
-</script>
+    </script>
