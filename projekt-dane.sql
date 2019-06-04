@@ -14,13 +14,13 @@ INSERT INTO `rodzaj_serwera` (`id_rodzaju`, `nazwa_rodzaju`) VALUES
 (5, 'VPS');
 
 INSERT INTO `serwery` (`id_serwera`, `pojemnosc`, `zajeta_pamiec`, `id_rodzaju`) VALUES
-(1, 1000000, 210000, 1),
+(1, 1000000, 310000, 1),
 (2, 1000000, 450000, 1),
 (3, 1000000, 170000, 2),
 (4, 1000000, 250000, 3),
 (5, 1000000, 390000, 5),
 (6, 1000000, 710000, 5),
-(7, 1000000, 520000, 4);
+(7, 1000000, 820000, 4);
 
 
 INSERT INTO `uslugi` (`id_uslugi`, `zajeta_pamiec`, `data_poczatkowa`, `data_koncowa`, `id_pakietu`, `id_serwera`) VALUES
@@ -75,7 +75,11 @@ INSERT INTO `uslugi` (`id_uslugi`, `zajeta_pamiec`, `data_poczatkowa`, `data_kon
 (94, 168, '2018-06-30', '2019-10-11', 3, 2),
 (96, 8336, '2019-02-03', '2019-06-14', 4, 4),
 (98, 1960, '2019-03-30', '2020-02-04', 4, 6),
-(100, 8643, '2018-08-31', '2020-05-16', 4, 2);
+(100, 8643, '2018-08-31', '2020-05-16', 4, 2),
+(101, NULL, '2019-06-04', '2019-07-04', 4, 7),
+(102, NULL, '2019-06-04', '2019-07-04', 4, 7),
+(103, NULL, '2019-06-04', '2019-07-04', 4, 1),
+(104, NULL, '2019-06-04', '2019-07-04', 4, 7);
 
 INSERT INTO `nieaktywne_uslugi` (`id_nieaktywnej_uslugi`, `id_uslugi`, `data_poczatkowa`, `data_koncowa`, `id_pakietu`, `id_serwera`) VALUES
 (7, 29, '2019-05-01', '2019-05-29', 1, 1),
@@ -400,7 +404,11 @@ INSERT INTO `posiadane_uslugi` (`id_posiadania`, `id_uzytkownika`, `id_uslugi`) 
 (94, 97, 94),
 (96, 99, 96),
 (98, 101, 98),
-(100, 103, 100);
+(100, 103, 100),
+(101, 4, 101),
+(102, 4, 102),
+(103, 4, 103),
+(104, 4, 104);
 
 INSERT INTO `powiadomienia` (`id_powiadomienia`, `tytul`, `tresc`, `data`, `id_uzytkownika`) VALUES
 (7, 'Zakończenie usługi', 'Twoja usługa o ID 4 zakończyła się!', '2019-06-04', 7),
@@ -450,5 +458,6 @@ INSERT INTO `powiadomienia` (`id_powiadomienia`, `tytul`, `tresc`, `data`, `id_u
 (51, 'Zakończenie usługi', 'Twoja usługa o ID 93 zakończyła się!', '2019-06-04', 96),
 (52, 'Zakończenie usługi', 'Twoja usługa o ID 95 zakończyła się!', '2019-06-04', 98),
 (53, 'Zakończenie usługi', 'Twoja usługa o ID 97 zakończyła się!', '2019-06-04', 100),
-(54, 'Zakończenie usługi', 'Twoja usługa o ID 99 zakończyła się!', '2019-06-04', 102);
+(54, 'Zakończenie usługi', 'Twoja usługa o ID 99 zakończyła się!', '2019-06-04', 102),
+(55, 'Pamięć serwera kończy się', 'Pamięć serwera o ID 7 jest zapełnione w ponad 82%!', '2019-06-04', 1);
 

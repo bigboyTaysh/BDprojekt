@@ -68,7 +68,7 @@ CREATE TABLE `uzytkownicy` (
   `telefon` int(15),
   `data_dolaczenia` date,
   `id_rodzaju` int(11)
-);
+); 
 
 ALTER TABLE `posiadane_uslugi`
   ADD FOREIGN KEY (`id_uzytkownika`) REFERENCES `uzytkownicy` (`id_uzytkownika`),
