@@ -31,6 +31,8 @@ require "templates/head.php";
         $sql = "SELECT * FROM serwery NATURAL JOIN rodzaj_serwera WHERE
             (zajeta_pamiec / pojemnosc * 100 ) < ((pojemnosc-'$max_pamiec') / pojemnosc * 100) GROUP BY id_rodzaju";
 
+            
+
         $statement = $connect->prepare($sql);
         $statement->execute();
 

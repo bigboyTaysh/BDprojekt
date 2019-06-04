@@ -85,14 +85,19 @@ button:not([class=red]):hover {
 }
 
 .main {
-    margin-left: 5%;
-    margin-right: 5%;
-    width: 90%;
+    margin-left: 1%;
+    margin-right: 1%;
+    width: 98%;
 }
 
 .inmain {
     overflow-y: scroll;
-    height: 600px;
+    height: 700px;
+}
+
+.inmain2 {
+    overflow-y: scroll;
+    height: 300px;
 }
 
 p.welcome {

@@ -35,7 +35,7 @@ if ($result->num_rows > 0) {
             . "</tr>");
     }
 } else {
-    $data[] = array("</br><tr id='" . $id . "'>"
+    $data[] = array("</br><tr class='tr_uslugi_1' id='" . $id . "'>"
             . "<td>".$id."</td>"
             . "<td>Brak usług</td>"
             . "</tr>");
