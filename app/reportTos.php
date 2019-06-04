@@ -17,18 +17,6 @@ $all = 0;
 $data_min = $_POST['data_min'];
 $data_max = $_POST['data_max'];
 
-/*
-
-$sql = "SELECT COUNT(*) AS total FROM "
-    . "(SELECT r.id_rodzaju FROM rodzaj_serwera r LEFT JOIN"
-    . " serwery s ON r.id_rodzaju = s.id_rodzaju LEFT JOIN"
-    . " uslugi u ON s.id_serwera = u.id_serwera WHERE"
-    . " (u.data_poczatkowa BETWEEN '$data_min' AND '$data_max') GROUP BY"
-    . " r.id_rodzaju) as some";
-
-    */
-/* @var $result type */
-
 $sql = "SELECT COUNT(*) AS total FROM rodzaj_serwera";
 
 $result = $conn->query($sql);

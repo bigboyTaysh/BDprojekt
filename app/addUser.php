@@ -15,7 +15,7 @@ $nazwisko = $_POST['nazwisko'];
 $email = $_POST['email'];
 $telefon = $_POST['telefon'];
 $rodzaj = $_POST['rodzaj'];
-$id_rodzaju = 3;
+$id_rodzaju = 0;
 
 
 $conn = new mysqli($servername, $username, $password, $dbname);

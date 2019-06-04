@@ -20,7 +20,7 @@ $data_max = $_POST['data_max'];
 
 
 $sql = "SELECT COUNT(*) AS total FROM pakiety";
-/* @var $result type */
+
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {

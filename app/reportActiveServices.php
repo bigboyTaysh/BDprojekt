@@ -20,7 +20,7 @@ $data = array();
 $sql = "SELECT COUNT(*) as total FROM nieaktywne_uslugi WHERE"
         . " data_koncowa >= '$data_min' AND"
         . " data_poczatkowa <= '$data_max'";
-/* @var $result type */
+
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -31,7 +31,7 @@ if ($result->num_rows > 0) {
 $sql = "SELECT COUNT(*) as total FROM uslugi WHERE"
         . " data_koncowa >= '$data_min' AND"
         . " data_poczatkowa <= '$data_max'";
-/* @var $result type */
+
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
