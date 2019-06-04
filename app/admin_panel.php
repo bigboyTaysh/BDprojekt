@@ -191,7 +191,7 @@
             </div>
         
     </div>
-    <div id="inmain2">
+    <div class="inmain2">
         <table id="wynik_uslugi_1" style="display: none">
             <tr>
                 <td>ID uzytkownia</td>

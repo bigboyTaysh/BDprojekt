@@ -94,8 +94,8 @@ require "templates/head.php";
     ?>
         <div class="col-container">
             <div class="napisy">
-                <div>Stare haslo</div></br>
-                <div>Nowe haslo</div></br>
+                <div>Stare hasło</div></br>
+                <div>Nowe hasło</div></br>
                 <div>Powtórz haslo</div></br>
                 <div>Imie</div></br>
                 <div>Nazwisko</div></br>

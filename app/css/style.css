@@ -97,12 +97,17 @@ button:not([class=red]):hover {
 
 .inmain {
     overflow-y: scroll;
-    height: 700px;
+    height: 650px;
 }
 
 .inmain2 {
     overflow-y: scroll;
     height: 300px;
+}
+
+.inmain::-webkit-scrollbar,
+.inmain2::-webkit-scrollbar { 
+    width: 0 !important
 }
 
 p.welcome {
