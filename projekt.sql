@@ -70,42 +70,6 @@ CREATE TABLE `uzytkownicy` (
   `id_rodzaju` int(11)
 );
 
-/*
-ALTER TABLE `nieaktywne_uslugi`
-  ADD PRIMARY KEY (`id_nieaktywnej_uslugi`);
-
-ALTER TABLE `pakiety`
-  ADD PRIMARY KEY (`id_pakietu`);
-
-ALTER TABLE `posiadane_uslugi`
-  ADD PRIMARY KEY (`id_posiadania`),
-  ADD KEY `id_uzytkownika` (`id_uzytkownika`),
-  ADD KEY `id_uslugi` (`id_uslugi`);
-
-ALTER TABLE `powiadomienia`
-  ADD PRIMARY KEY (`id_powiadomienia`),
-  ADD KEY `id_uzytkownika` (`id_uzytkownika`);
-
-ALTER TABLE `rodzaj_konta`
-  ADD PRIMARY KEY (`id_rodzaju`);
-
-ALTER TABLE `rodzaj_serwera`
-  ADD PRIMARY KEY (`id_rodzaju`);
-
-ALTER TABLE `serwery`
-  ADD PRIMARY KEY (`id_serwera`),
-  ADD KEY `id_rodzaju` (`id_rodzaju`);
-
-ALTER TABLE `uslugi`
-  ADD PRIMARY KEY (`id_uslugi`),
-  ADD KEY `id_pakietu` (`id_pakietu`),
-  ADD KEY `id_serwera` (`id_serwera`);
-
-ALTER TABLE `uzytkownicy`
-  ADD PRIMARY KEY (`id_uzytkownika`),
-  ADD KEY `id_rodzaju` (`id_rodzaju`);
-  */
-
 ALTER TABLE `posiadane_uslugi`
   ADD FOREIGN KEY (`id_uzytkownika`) REFERENCES `uzytkownicy` (`id_uzytkownika`),
   ADD FOREIGN KEY (`id_uslugi`) REFERENCES `uslugi` (`id_uslugi`);

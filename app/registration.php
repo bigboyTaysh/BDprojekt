@@ -81,6 +81,7 @@ and open the template in the editor.
                 document.getElementById("haslo2").setAttribute("class", "input");
                 document.getElementById("imie").setAttribute("class", "input");
                 document.getElementById("nazwisko").setAttribute("class", "input");
+                document.getElementById("email").setAttribute("class", "input");
                 document.getElementById("telefon").setAttribute("class", "input");
 
                 if (document.getElementById("login").value !== '') {
