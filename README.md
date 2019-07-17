@@ -1,3 +1,2 @@
-# bazy-projekt
-Usługi hostingowe
+ # Usługi hostingowe  
 projekt z baz danych, sem 5
