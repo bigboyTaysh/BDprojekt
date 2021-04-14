@@ -1,6 +1,5 @@
 # Usługi hostingowe  
-projekt z baz danych, sem 5 - 2019
-# html, css, js(jQuery, Ajax), PHP, mySQL  
+**html, css, js(jQuery, Ajax), PHP, mySQL**
 
 # Użytkownik  
 Możliwość kupienia kilka rodzajów hostingu w wybranej konfiguracji. Opcja zarządzania kupionymi hostingami. Powiadomienia związane z zakupionymi usługami. 
